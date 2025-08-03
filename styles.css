@@ -54,6 +54,20 @@ p {
     margin: 0.5em 0 0.5em 1.5em;
     color: #e0e0e0;
 }
+.cv-list a {
+    color: #00b4d8;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.cv-list a:hover {
+    color: #90e0ef;
+}
+.cv-list span {
+    color: #aaa;
+    font-size: 0.95em;
+    margin-left: 6px;
+}
 .cv-linkedin {
     display: inline-block;
     margin-top: 10px;
