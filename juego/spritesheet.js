@@ -1,7 +1,7 @@
 const INIT_SPRITESHEETS = [
   {
     key: 'foam',
-    path: 'assets/Terrain/Water/Foam/foam.png',
+    path: 'assets/Terrain/Water/Foam/Foam.png',
     frameWidth: 64*3,
     frameHeight: 64*3
   },
