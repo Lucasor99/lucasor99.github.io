@@ -12,7 +12,7 @@ export default class Nivel0 extends Phaser.Scene {
 
     preload() {
 
-        this.load.image('water', 'assets/Terrain/Water/water.png')
+        this.load.image('water', 'assets/Terrain/Water/Water.png')
         // this.load.atlas('flats', 'assets/Terrain/Ground/Tilemap_Flat.png', 'assets/Terrain/Ground/Tilemap_Flat.json')
         this.load.image('flats', 'assets/Terrain/Ground/Tilemap_Flat.png')
         this.load.image('elevation', 'assets/Terrain/Ground/Tilemap_Elevation.png')
@@ -21,7 +21,7 @@ export default class Nivel0 extends Phaser.Scene {
         this.load.image('tower', 'assets/Factions/Knights/Buildings/Tower/Tower_Blue.png')
         this.load.image('house', 'assets/Factions/Knights/Buildings/House/House_Blue.png')
 
-        this.load.image('shadow', 'assets/Terrain/Ground/shadows.png')
+        this.load.image('shadow', 'assets/Terrain/Ground/Shadows.png')
 
         this.load.image('mushroom_small', 'assets/Deco/01.png')
         this.load.image('mushroom_medium', 'assets/Deco/02.png')
