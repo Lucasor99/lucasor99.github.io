@@ -1,0 +1,114 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "World0.tmx",
+    "console.history": [
+        "restart",
+        "help",
+        "- help",
+        "dir",
+        "ls"
+    ],
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "Todos los archivos (*)",
+    "fileStates": {
+        "": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "#Foam": {
+            "dynamicWrapping": false
+        },
+        "Foam.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "World0.tmx": {
+            "scale": 1,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 630.5,
+                "y": 329.5
+            }
+        },
+        "World0.tmx#Deco": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.33,
+            "scaleInEditor": 1
+        },
+        "World0.tmx#Elevation": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5
+        },
+        "World0.tmx#Flat": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "World0.tmx#Foam": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "World0.tmx#Knight_Buildings": {
+            "scaleInDock": 0.33,
+            "scaleInEditor": 1
+        },
+        "World0.tmx#Resources": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "World0.tmx#Shadows": {
+            "scaleInDock": 0.33
+        },
+        "World0.tmx#Tower_Blue": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "World1.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 552.6666666666666,
+                "y": 323.33333333333326
+            }
+        },
+        "World1.tmx#Flat": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.33
+        }
+    },
+    "last.exportedFilePath": "C:/Users/luisc/OneDrive/Documentos/JuegosJs/MiJuego",
+    "last.externalTilesetPath": "C:/Users/luisc/OneDrive/Documentos/JuegosJs/MiJuego",
+    "last.imagePath": "C:/Users/luisc/OneDrive/Documentos/JuegosJs/MiJuego/assets/Factions/Knights/Buildings/House",
+    "last.worldFilePath": "C:/Users/luisc/OneDrive/Documentos/JuegosJs/MiJuego",
+    "loadedWorlds": [
+        "C:/Users/luisc/OneDrive/Documentos/JuegosJs/MiJuego/aaa.world"
+    ],
+    "map.height": 11,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.renderOrder": "1",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "map.width": 20,
+    "openFiles": [
+        "World0.tmx",
+        "World1.tmx"
+    ],
+    "project": "Jueguito.tiled-project",
+    "recentFiles": [
+        "World1.tmx",
+        "World0.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 192,
+        "width": 192
+    },
+    "tileset.type": 1
+}

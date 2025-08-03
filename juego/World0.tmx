@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-up" width="20" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="8">
+ <editorsettings>
+  <export target="World0.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="Flat" tilewidth="64" tileheight="64" tilecount="40" columns="10">
+  <image source="assets/Terrain/Ground/Tilemap_Flat.png" width="640" height="256"/>
+ </tileset>
+ <tileset firstgid="41" name="Elevation" tilewidth="64" tileheight="64" tilecount="32" columns="4">
+  <image source="assets/Terrain/Ground/Tilemap_Elevation.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="73" name="Shadows" tilewidth="192" tileheight="192" tilecount="1" columns="1">
+  <image source="assets/Terrain/Ground/Shadows.png" width="192" height="192"/>
+ </tileset>
+ <tileset firstgid="74" name="Deco" tilewidth="192" tileheight="192" tilecount="18" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="64" height="64" source="assets/Deco/01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="2" x="25.6642" y="24.4088" width="16.1796" height="16.7375">
+     <ellipse/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="1">
+   <image width="64" height="64" source="assets/Deco/02.png"/>
+  </tile>
+  <tile id="2">
+   <image width="64" height="64" source="assets/Deco/03.png"/>
+   <objectgroup draworder="index" id="4">
+    <object id="4" x="14.9243" y="12.6926" width="36.5435" height="37.7988">
+     <ellipse/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="3">
+   <image width="64" height="64" source="assets/Deco/04.png"/>
+  </tile>
+  <tile id="4">
+   <image width="64" height="64" source="assets/Deco/05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="20.5034" y="18.4112" width="25.6642" height="19.3876">
+     <ellipse/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="5">
+   <image width="64" height="64" source="assets/Deco/06.png"/>
+  </tile>
+  <tile id="6">
+   <image width="64" height="64" source="assets/Deco/07.png"/>
+  </tile>
+  <tile id="7">
+   <image width="64" height="64" source="assets/Deco/08.png"/>
+  </tile>
+  <tile id="8">
+   <image width="64" height="64" source="assets/Deco/09.png"/>
+  </tile>
+  <tile id="9">
+   <image width="64" height="64" source="assets/Deco/10.png"/>
+  </tile>
+  <tile id="10">
+   <image width="64" height="64" source="assets/Deco/11.png"/>
+  </tile>
+  <tile id="11">
+   <image width="64" height="64" source="assets/Deco/12.png"/>
+  </tile>
+  <tile id="12">
+   <image width="64" height="64" source="assets/Deco/13.png"/>
+  </tile>
+  <tile id="13">
+   <image width="64" height="64" source="assets/Deco/14.png"/>
+  </tile>
+  <tile id="14">
+   <image width="64" height="64" source="assets/Deco/15.png"/>
+  </tile>
+  <tile id="15">
+   <image width="64" height="128" source="assets/Deco/16.png"/>
+  </tile>
+  <tile id="16">
+   <image width="64" height="128" source="assets/Deco/17.png"/>
+  </tile>
+  <tile id="17">
+   <image width="192" height="192" source="assets/Deco/18.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="92" name="Knight_Buildings" tilewidth="320" tileheight="256" tilecount="18" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="128" height="256" source="assets/Factions/Knights/Buildings/Tower/Tower_Blue.png"/>
+  </tile>
+  <tile id="1">
+   <image width="128" height="256" source="assets/Factions/Knights/Buildings/Tower/Tower_Construction.png"/>
+  </tile>
+  <tile id="2">
+   <image width="128" height="256" source="assets/Factions/Knights/Buildings/Tower/Tower_Destroyed.png"/>
+  </tile>
+  <tile id="3">
+   <image width="128" height="256" source="assets/Factions/Knights/Buildings/Tower/Tower_Purple.png"/>
+  </tile>
+  <tile id="4">
+   <image width="128" height="256" source="assets/Factions/Knights/Buildings/Tower/Tower_Red.png"/>
+  </tile>
+  <tile id="5">
+   <image width="128" height="256" source="assets/Factions/Knights/Buildings/Tower/Tower_Yellow.png"/>
+  </tile>
+  <tile id="6">
+   <image width="320" height="256" source="assets/Factions/Knights/Buildings/Castle/Castle_Blue.png"/>
+  </tile>
+  <tile id="7">
+   <image width="320" height="256" source="assets/Factions/Knights/Buildings/Castle/Castle_Construction.png"/>
+  </tile>
+  <tile id="8">
+   <image width="320" height="256" source="assets/Factions/Knights/Buildings/Castle/Castle_Destroyed.png"/>
+  </tile>
+  <tile id="9">
+   <image width="320" height="256" source="assets/Factions/Knights/Buildings/Castle/Castle_Purple.png"/>
+  </tile>
+  <tile id="10">
+   <image width="320" height="256" source="assets/Factions/Knights/Buildings/Castle/Castle_Red.png"/>
+  </tile>
+  <tile id="11">
+   <image width="320" height="256" source="assets/Factions/Knights/Buildings/Castle/Castle_Yellow.png"/>
+  </tile>
+  <tile id="12">
+   <image width="128" height="192" source="assets/Factions/Knights/Buildings/House/House_Blue.png"/>
+  </tile>
+  <tile id="13">
+   <image width="128" height="192" source="assets/Factions/Knights/Buildings/House/House_Construction.png"/>
+  </tile>
+  <tile id="14">
+   <image width="128" height="192" source="assets/Factions/Knights/Buildings/House/House_Destroyed.png"/>
+  </tile>
+  <tile id="15">
+   <image width="128" height="192" source="assets/Factions/Knights/Buildings/House/House_Purple.png"/>
+  </tile>
+  <tile id="16">
+   <image width="128" height="192" source="assets/Factions/Knights/Buildings/House/House_Red.png"/>
+  </tile>
+  <tile id="17">
+   <image width="128" height="192" source="assets/Factions/Knights/Buildings/House/House_Yellow.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="110" name="Resources" tilewidth="1" tileheight="1" tilecount="0" columns="0"/>
+ <layer id="2" name="Flat" width="20" height="11" locked="1">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,0,
+0,11,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,0,
+0,11,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,0,
+0,11,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,0,
+0,11,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,0,
+0,11,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,0,
+0,11,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,0,
+0,11,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,0,
+0,21,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,23,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="Elevation" width="20" height="11" locked="1">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,41,42,42,42,42,42,42,42,42,42,42,42,42,42,42,43,0,0,
+0,0,45,46,46,46,46,46,46,46,46,46,46,46,46,46,46,47,0,0,
+0,0,45,46,46,46,46,46,46,50,50,50,50,50,50,50,50,51,0,0,
+0,0,49,51,69,70,71,49,51,54,54,54,54,54,54,54,54,63,0,0,
+0,0,53,54,12,12,12,54,63,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="Flat2" width="20" height="11" locked="1">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,0,0,
+0,0,11,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,0,0,
+0,0,11,12,22,22,22,12,12,22,22,22,22,22,22,22,22,23,0,0,
+0,0,21,23,0,0,0,21,23,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="5" name="Deco" width="20" height="11">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,81,0,0,0,0,0,0,0,82,0,0,0,0,0,0,0,0,0,
+0,0,0,98,0,0,0,0,0,0,0,0,0,0,78,0,92,0,0,0,
+0,0,78,0,0,0,0,0,0,0,0,0,0,0,0,0,76,0,0,0,
+0,76,0,0,0,0,0,0,74,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,104,0,78,104,0,0,104,0,0,0,0,
+0,0,0,0,0,0,0,0,2147483738,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,79,0,0,0,0,0,0,0,0,0,0,76,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
