@@ -33,6 +33,9 @@ export default class Nivel0 extends Phaser.Scene {
 
         this.load.image('sign', 'assets/Deco/17.png')
 
+        this.load.image('button_sq', 'assets/UI/Buttons/Button_Blue_9Slides.png')
+        this.load.image('button_pressed_sq', 'assets/UI/Buttons/Button_Blue_9Slides_Pressed.png')
+
         initSpritesheet(this)
     }
 
@@ -164,6 +167,73 @@ export default class Nivel0 extends Phaser.Scene {
             .setOrigin(0, 0)
             .setScrollFactor(0)
 
+        const btnSize = 24;
+        const marginBottom = 50;
+        const arrowFontSize = 32;
+        const arrowOffsetX = btnSize * 2.9  ; // separación horizontal
+        const arrowOffsetY = btnSize * 2.9; // separación vertical
+        const leftShift = 60;
+        const centerX = this.cameras.main.width / 2 - leftShift;
+        const baseY = this.cameras.main.height - marginBottom;
+        // Arriba
+        const btnUp = this.add.image(centerX, baseY - arrowOffsetY, 'button_sq').setInteractive({ pixelPerfect: true }).setScrollFactor(0).setScale(0.35);
+        this.add.text(centerX, baseY - arrowOffsetY, '↑', { fontSize: `${arrowFontSize}px`, fill: '#fff', fontStyle: 'bold' }).setOrigin(0.5).setScrollFactor(0);
+        // Izquierda
+        const btnLeft = this.add.image(centerX - arrowOffsetX, baseY, 'button_sq').setInteractive({ pixelPerfect: true }).setScrollFactor(0).setScale(0.35);
+        this.add.text(centerX - arrowOffsetX, baseY, '←', { fontSize: `${arrowFontSize}px`, fill: '#fff', fontStyle: 'bold' }).setOrigin(0.5).setScrollFactor(0);
+        // Derecha
+        const btnRight = this.add.image(centerX + arrowOffsetX, baseY, 'button_sq').setInteractive({ pixelPerfect: true }).setScrollFactor(0).setScale(0.35);
+        this.add.text(centerX + arrowOffsetX, baseY, '→', { fontSize: `${arrowFontSize}px`, fill: '#fff', fontStyle: 'bold' }).setOrigin(0.5).setScrollFactor(0);
+        // Abajo (base de la pirámide, entre los laterales)
+        const btnDown = this.add.image(centerX, baseY , 'button_sq').setInteractive({ pixelPerfect: true }).setScrollFactor(0).setScale(0.35);
+        this.add.text(centerX, baseY , '↓', { fontSize: `${arrowFontSize}px`, fill: '#fff', fontStyle: 'bold' }).setOrigin(0.5).setScrollFactor(0);
+
+        // Botón de ataque
+        const btnAttack = this.add.image(centerX + arrowOffsetX * 2.5, baseY, 'button_sq').setInteractive({ pixelPerfect: true }).setScrollFactor(0).setScale(0.35);
+        this.add.text(centerX + arrowOffsetX * 2.5, baseY, '⚔', { fontSize: `${arrowFontSize+4}px`, fill: '#fff' }).setOrigin(0.5).setScrollFactor(0);
+
+        // Simular pulsaciones de teclas y cambio de aspecto
+        btnUp.on('pointerdown', () => {
+            this.keys.up.isDown = true;
+            btnUp.setTexture('button_pressed_sq');
+        });
+        btnUp.on('pointerup', () => {
+            this.keys.up.isDown = false;
+            btnUp.setTexture('button_sq');
+        });
+        btnDown.on('pointerdown', () => {
+            this.keys.down.isDown = true;
+            btnDown.setTexture('button_pressed_sq');
+        });
+        btnDown.on('pointerup', () => {
+            this.keys.down.isDown = false;
+            btnDown.setTexture('button_sq');
+        });
+        btnLeft.on('pointerdown', () => {
+            this.keys.left.isDown = true;
+            btnLeft.setTexture('button_pressed_sq');
+        });
+        btnLeft.on('pointerup', () => {
+            this.keys.left.isDown = false;
+            btnLeft.setTexture('button_sq');
+        });
+        btnRight.on('pointerdown', () => {
+            this.keys.right.isDown = true;
+            btnRight.setTexture('button_pressed_sq');
+        });
+        btnRight.on('pointerup', () => {
+            this.keys.right.isDown = false;
+            btnRight.setTexture('button_sq');
+        });
+
+        btnAttack.on('pointerdown', () => {
+            this.keys.E.isDown = true;
+            btnAttack.setTexture('button_pressed_sq');
+        });
+        btnAttack.on('pointerup', () => {
+            this.keys.E.isDown = false;
+            btnAttack.setTexture('button_sq');
+        });
     }
 
     onSwordHitEnemy(swordHitbox, enemy) {
