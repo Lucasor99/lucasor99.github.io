@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orquestación SD-WAN con BGP sobre IPSec</title>
+    <link rel="stylesheet" href="styles.css?v2">
+    <link rel="stylesheet" href="sdwan.css?v1">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="description" content="Explicación detallada de cómo funciona una SD-WAN con BGP sobre IPSec.">
+    <meta name="keywords" content="SD-WAN, BGP, IPSec, VTI, Fortinet, redes, telecomunicaciones">
+    <meta name="author" content="Luis Castaño Ortega">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Orquestación SD-WAN con BGP sobre IPSec</h1>
+        <p>Explicación del funcionamiento de una SD-WAN utilizando BGP sobre túneles IPSec con interfaces VTI,
+            siguiendo una estructura jerárquica de tres capas: Transporte, Inteligencia y Control. A continuación, se
+            detalla cómo se establece la conectividad segura, cómo la SD-WAN optimiza el tráfico en tiempo real y cómo
+            BGP maneja la propagación de rutas de manera automática y resiliente.</p>
+
+        <div class="layer">
+            <h3>Capa 1: El Transporte (IPSec/VTI)</h3>
+            <p>En esta capa, se crean túneles seguros sobre internet utilizando IPSec para cifrar el tráfico entre
+                sedes. Las interfaces VTI (Virtual Tunnel Interface) son cruciales porque permiten que el tráfico IP
+                fluya directamente a través de los túneles como si fueran enlaces físicos. Esto asegura que las rutas
+                BGP se mantengan estables, ya que BGP ve las VTI como interfaces normales, evitando interrupciones en la
+                adyacencia BGP incluso si cambian los túneles subyacentes. En una topología mesh, cada sede puede tener
+                múltiples ISPs redundantes.</p>
+            <p>Si un ISP se cae, la VTI sigue “up” porque mantiene la misma IP/endpoint; en la mayoría de las SD-WAN
+                se mantienen dos túneles permanentes (uno por cada ISP) y el tráfico se conmuta instantáneamente al túnel
+                del ISP alternativo que ya estaba establecido.</p>
+
+            <div class="mermaid">
+                graph LR
+                    R1[Router 1] --- R2[Router 2]
+                    R1 --- R3[Router 3]
+                    R2 --- R3
+
+                    linkStyle 0,1,2 stroke:#2ecc71,stroke-width:2px;
+            </div>
+            <p>Configuración típica: Se configura una política IPSec con modo túnel, asociada a una VTI. La VTI obtiene
+                una IP (ej. 10.0.0.1/30) y se usa en BGP para peering. Esto permite que BGP anuncie rutas corporativas a
+                través de los túneles sin depender del estado físico de los enlaces.</p>
+        </div>
+
+        <div class="layer">
+            <h3>Capa 2: La Inteligencia (SD-WAN)</h3>
+            <p>La SD-WAN actúa como el cerebro de la red, monitoreando métricas en tiempo real como latencia, jitter,
+                pérdida de paquetes y ancho de banda disponible. Basándose en SLA (Service Level Agreements) definidos
+                por el administrador, selecciona automáticamente el mejor túnel para cada flujo de tráfico. Por
+                instancia, si un túnel experimenta una degradación (ej. pérdida >5%), la SD-WAN redirige el tráfico a un
+                túnel alternativo sin intervención manual. La SD-WAN suele usar BFD (Bidirectional Forwarding
+                Detection) para detectar fallos en &lt; 500 ms y disparar el failover hacia la ruta alternativa.</p>
+            <p>Mecanismos de failover configurables en SD-WAN incluyen:</p>
+            <ul>
+                <li><strong>Health-checks activos:</strong> Envío periódico de paquetes ICMP o TCP para verificar la salud del enlace.</li>
+                <li><strong>Monitoreo de SLA:</strong> Verificación de latencia, jitter y pérdida de paquetes contra umbrales definidos.</li>
+                <li><strong>BFD (Bidirectional Forwarding Detection):</strong> Protocolo ligero para detección rápida de fallos en enlaces.</li>
+                <li><strong>Failover automático:</strong> Conmutación instantánea a rutas alternativas basadas en políticas.</li>
+                <li><strong>Load-balancing:</strong> Distribución de tráfico entre múltiples enlaces para optimizar rendimiento.</li>
+            </ul>
+            <p>Esto se configura en el perfil SD-WAN, donde se definen reglas de health-check y estrategias de
+                load-balancing. La SD-WAN no solo reacciona a fallos, sino que también optimiza el rendimiento continuo,
+                por ejemplo, enviando tráfico de voz (VoIP) por el enlace de menor latencia y datos por el de mayor
+                ancho de banda.</p>
+        </div>
+
+        <div class="layer">
+            <h3>Capa 3: El Control (BGP)</h3>
+            <p>BGP es el protocolo de enrutamiento que propaga rutas entre las sedes de manera automática. Al usar VTI,
+                BGP establece sesiones (peering) sobre los túneles IPSec, permitiendo que rutas corporativas (ej.
+                192.168.0.0/24) se anuncien y aprendan dinámicamente. Cuando la SD-WAN cambia de túnel debido a una
+                degradación, BGP mantiene la sesión "Up" porque la VTI permanece activa, evitando microcortes en la
+                conectividad. En redes iBGP, el atributo que más se suele ajustar para influir en la salida es Local
+                Preference; además, muchas SD-WAN usan Comunidades BGP para marcar rutas y que el plano de control pueda
+                aplicar políticas específicas (por ejemplo, preferir cierto enlace o bloquear anuncios hacia un peer).</p>
+            <p>Atributos BGP clave para influir en la selección de rutas:</p>
+            <ul>
+                <li><strong>Local Preference:</strong> Atributo local (no se propaga) que indica preferencia de salida; mayor valor se prefiere.</li>
+                <li><strong>AS-Path:</strong> Lista de AS por los que pasa la ruta; rutas con AS-Path más corto se prefieren.</li>
+                <li><strong>MED (Multi-Exit Discriminator):</strong> Sugerencia para elegir entrada; menor valor se prefiere.</li>
+                <li><strong>Comunidades BGP:</strong> Etiquetas para aplicar políticas (ej. no-export, preferir enlace).</li>
+                <li><strong>Weight:</strong> Atributo Cisco específico; mayor valor se prefiere (no estándar).</li>
+            </ul>
+            <p>BGP también soporta atributos como Origin y Next-Hop para influir en la selección de rutas, integrándose con la
+                SD-WAN para una orquestación completa.</p>
+        </div>
+
+        <div class="layer">
+            <h3>Diagrama Interactivo: Simulación de Red SD-WAN</h3>
+            <p>Este diagrama representa una topología mesh con tres routers (R1, R2, R3) conectados entre sí. Cada
+                enlace representa un túnel IPSec/VTI. Haz clic en un router para ver sus rutas BGP conocidas. Interactúa
+                con los botones para alternar el estado de los enlaces y observar cómo BGP propaga cambios y la SD-WAN
+                redirige tráfico automáticamente.</p>
+            <div class="diagram-container">
+                <div class="legend-and-panel">
+                    <p><strong>Direccionamiento:</strong></p>
+                    <ul>
+                        <li>R1: IP 10.1.1.1, Red local 10.1.0.0/24</li>
+                        <li>R2: IP 10.2.1.1, Red local 10.2.0.0/24</li>
+                        <li>R3: IP 10.3.1.1, Red local 10.3.0.0/24</li>
+                    </ul>
+                    <div id="routePanel">Selecciona un router para ver sus rutas BGP.</div>
+                </div>
+                <div class="canvas">
+                    <canvas id="networkCanvas" width="600" height="400" style="max-width: 100%; height: auto;"></canvas>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="button" onclick="resetNetwork()">Reiniciar</button>
+                <button class="button" onclick="toggleLink12()">Tirar/levantar R1-R2</button>
+                <button class="button" onclick="toggleLink13()">Tirar/levantar R1-R3</button>
+                <button class="button" onclick="toggleLink23()">Tirar/levantar R2-R3</button>
+                <button class="button" onclick="sendPacket()">Enviar paquete R1→R2</button>
+            </div>
+            <div class="bgp-config">
+                <h4>Configuración BGP (para influir en rutas)</h4>
+                <p>Configura Local Preference (LP), AS-Path Length y MED por enlace para ver cómo cambian las rutas BGP. Mayor LP, menor AS-Path y menor MED se prefieren.</p>
+                <div>
+                    <label>R1-R2 Local Preference: <input type="number" id="lp12" value="100" min="0" onchange="updateBGP()"></label>
+                    <label>AS-Path Length: <input type="number" id="as12" value="1" min="0" onchange="updateBGP()"></label>
+                    <label>MED: <input type="number" id="med12" value="0" min="0" onchange="updateBGP()"></label>
+                </div>
+                <div>
+                    <label>R1-R3 Local Preference: <input type="number" id="lp13" value="100" min="0" onchange="updateBGP()"></label>
+                    <label>AS-Path Length: <input type="number" id="as13" value="1" min="0" onchange="updateBGP()"></label>
+                    <label>MED: <input type="number" id="med13" value="0" min="0" onchange="updateBGP()"></label>
+                </div>
+                <div>
+                    <label>R2-R3 Local Preference: <input type="number" id="lp23" value="100" min="0" onchange="updateBGP()"></label>
+                    <label>AS-Path Length: <input type="number" id="as23" value="1" min="0" onchange="updateBGP()"></label>
+                    <label>MED: <input type="number" id="med23" value="0" min="0" onchange="updateBGP()"></label>
+                </div>
+                <p><em>Nota: Puedes crear "bucles" configurando LPs para que R1 vaya a R3 para R2, y R3 vaya a R1 para R2, simulando rutas conflictivas en BGP.</em></p>
+            </div>
+            <div id="status">Estado: Normal. Rutas propagadas vía BGP.</div>
+        </div>
+
+        <script src="sdwan.js"></script>
+    </div>
+</body>
+
+</html>
