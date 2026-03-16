@@ -108,7 +108,7 @@ function updateHighlightedLinks() {
 
 function updateRoutePanel() {
     if (selectedNode !== null) {
-        const routesText = nodes[selectedNode].routes.map(r => `${r.dest} -> ${r.nextHop} via ${r.via} (LP:${r.lp}, AS:${r.asPath}, MED:${r.med})`).join('\n');
+        const routesText = nodes[selectedNode].routes.map(r => `${r.dest} -> ${r.nextHop} via ${r.via}`).join('\n');
         routePanel.textContent = `Rutas BGP de ${nodes[selectedNode].label} (${nodes[selectedNode].ip}):\n${routesText}`;
     }
 }
@@ -175,6 +175,26 @@ function resetNetwork() {
     packet = null;
     selectedNode = null;
     highlightedLinks.clear();
+    // Reset BGP attributes to defaults
+    links[0].localPreference = 100;
+    links[0].asPathLength = 1;
+    links[0].med = 0;
+    links[1].localPreference = 100;
+    links[1].asPathLength = 1;
+    links[1].med = 0;
+    links[2].localPreference = 100;
+    links[2].asPathLength = 1;
+    links[2].med = 0;
+    // Update inputs
+    document.getElementById('lp12').value = 100;
+    document.getElementById('as12').value = 1;
+    document.getElementById('med12').value = 0;
+    document.getElementById('lp13').value = 100;
+    document.getElementById('as13').value = 1;
+    document.getElementById('med13').value = 0;
+    document.getElementById('lp23').value = 100;
+    document.getElementById('as23').value = 1;
+    document.getElementById('med23').value = 0;
     calculateRoutes();
     status.textContent = 'Estado: Normal. Rutas propagadas vía BGP.';
     routePanel.textContent = 'Selecciona un router para ver sus rutas BGP.';
@@ -226,17 +246,20 @@ function sendPacket() {
 
 function animatePacket() {
     if (!packet) return;
+    
     packet.progress += 0.01;
     if (packet.progress >= 1) {
         packet.hops++;
         if (packet.hops > 10) {
             status.textContent = 'Paquete en loop infinito, detenido.';
             packet = null;
+            draw();
             return;
         }
         // Arrived at packet.to
         if (packet.to === packet.finalDest) {
-            packet = null; // Arrived
+            packet = null;
+            draw();
             return;
         }
         // Choose next hop from current to finalDest
@@ -244,6 +267,7 @@ function animatePacket() {
         if (!route || route.nextHop === 'local') {
             status.textContent = 'Paquete atascado: no hay ruta desde ' + nodes[packet.to].label;
             packet = null;
+            draw();
             return;
         }
         const nextHopIdx = nodes.findIndex(n => n.ip === route.nextHop);
@@ -259,11 +283,15 @@ canvas.addEventListener('click', (e) => {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    selectedNode = nodes.findIndex(node => Math.sqrt((node.x - x)**2 + (node.y - y)**2) < 35);
-    if (selectedNode !== -1) {
+    const index = nodes.findIndex(node => Math.sqrt((node.x - x)**2 + (node.y - y)**2) < 35);
+    selectedNode = index !== -1 ? index : null;
+    if (selectedNode !== null) {
         updateHighlightedLinks();
         const routesText = nodes[selectedNode].routes.map(r => `${r.dest} -> ${r.nextHop} via ${r.via}`).join('\n');
         routePanel.textContent = `Rutas BGP de ${nodes[selectedNode].label} (${nodes[selectedNode].ip}):\n${routesText}`;
+    } else {
+        highlightedLinks.clear();
+        routePanel.textContent = 'Selecciona un router para ver sus rutas BGP.';
     }
     draw();
 });

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orquestación SD-WAN con BGP sobre IPSec</title>
     <link rel="stylesheet" href="styles.css?v2">
-    <link rel="stylesheet" href="sdwan.css?v1">
+    <link rel="stylesheet" href="sdwan.css?v2">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta name="description" content="Explicación detallada de cómo funciona una SD-WAN con BGP sobre IPSec.">
     <meta name="keywords" content="SD-WAN, BGP, IPSec, VTI, Fortinet, redes, telecomunicaciones">
@@ -119,7 +119,7 @@
                 <button class="button" onclick="toggleLink12()">Tirar/levantar R1-R2</button>
                 <button class="button" onclick="toggleLink13()">Tirar/levantar R1-R3</button>
                 <button class="button" onclick="toggleLink23()">Tirar/levantar R2-R3</button>
-                <button class="button" onclick="sendPacket()">Enviar paquete R1→R2</button>
+                <button class="button send-button" onclick="sendPacket()">Enviar paquete R1→R2</button>
             </div>
             <div class="bgp-config">
                 <h4>Configuración BGP (para influir en rutas)</h4>

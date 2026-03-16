@@ -119,6 +119,19 @@
     background-color: #007bff;
 }
 
+.send-button {
+    background-color: #cc5555;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.send-button:hover {
+    background-color: #aa4444;
+}
+
 .diagram-container {
     display: flex;
     gap: 20px;
@@ -167,7 +180,72 @@
         flex-direction: column;
         align-items: center;
     }
-    .legend-and-panel {
-        order: -1; /* Arriba en móvil */
+    .bgp-config div {
+        flex-direction: column;
+        align-items: flex-start;
     }
+    .bgp-config label {
+        min-width: auto;
+        width: 100%;
+    }
+    .bgp-config input {
+        width: 100%;
+    }
+}
+.bgp-config {
+    margin: 20px 0;
+    padding: 20px;
+    background: #2c3136;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.bgp-config h4 {
+    color: #00b4d8;
+    margin-bottom: 10px;
+}
+
+.bgp-config p {
+    color: #eaeaea;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.bgp-config div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.bgp-config label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.8em;
+    color: #eaeaea;
+    min-width: 120px;
+    gap: 5px;
+}
+
+.bgp-config input {
+    padding: 5px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background: #333;
+    color: #eaeaea;
+    font-size: 0.9em;
+    width: 60px;
+}
+
+.bgp-config input:focus {
+    outline: none;
+    border-color: #00b4d8;
+    box-shadow: 0 0 5px #00b4d8;
+}
+
+.bgp-config em {
+    color: #ff6b6b;
+    font-size: 0.8em;
 }
