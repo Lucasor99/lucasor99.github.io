@@ -32,11 +32,7 @@
                 sedes. Las interfaces VTI (Virtual Tunnel Interface) son cruciales porque permiten que el tráfico IP
                 fluya directamente a través de los túneles como si fueran enlaces físicos. Esto asegura que las rutas
                 BGP se mantengan estables, ya que BGP ve las VTI como interfaces normales, evitando interrupciones en la
-                adyacencia BGP incluso si cambian los túneles subyacentes. En una topología mesh, cada sede puede tener
-                múltiples ISPs redundantes.</p>
-            <p>Si un ISP se cae, la VTI sigue “up” porque mantiene la misma IP/endpoint; en la mayoría de las SD-WAN
-                se mantienen dos túneles permanentes (uno por cada ISP) y el tráfico se conmuta instantáneamente al túnel
-                del ISP alternativo que ya estaba establecido.</p>
+                adyacencia BGP incluso si cambian los túneles subyacentes.</p>
 
             <div class="mermaid">
                 graph LR
